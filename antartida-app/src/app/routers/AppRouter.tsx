@@ -6,6 +6,8 @@ import { DashboardScreen } from "../shared/components/dashboard/DashboardScreen"
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 
+
+
 export const AppRouter = (): JSX.Element => {
 	moment.locale("es-ar");
 
@@ -21,7 +23,7 @@ export const AppRouter = (): JSX.Element => {
 					}
 				/>
 				<Route
-					path="/*"
+					path="/main/*"
 					element={
 						<PrivateRoute>
 							<DashboardScreen />
