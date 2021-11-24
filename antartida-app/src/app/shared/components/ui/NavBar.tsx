@@ -11,7 +11,7 @@ import { Drawer } from "./Drawer";
 
 export const NavBar = (): JSX.Element => {
 	return (
-		<Box sx={{ flexGrow: 1 }} >
+		<Box sx={{ flexGrow: 1}} >
 			<AppBar position="static">
 				<Toolbar>
 					<Drawer />

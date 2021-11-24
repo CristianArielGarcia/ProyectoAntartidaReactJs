@@ -4,7 +4,6 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import {
 	Accordion,
@@ -14,15 +13,25 @@ import {
 	Icon,
 	ListItemIcon,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// import classNames from "classnames";
+import {
+	Dashboard,
+	Menu,
+	ChevronRight,
+	ExpandMore,
+	ExitToApp,
+	Sensors,
+	PeopleAlt,
+	Api,
+	FilterHdr,
+	Info,
+	ContactMail,
+} from "@mui/icons-material";
+
 // import useFetchApi from "@app/shared/hooks/useFetchApi";
 // import { IPersonal } from "@app/models/sgrh/IPersonal";
 // import { usuarioSGRHSliceRequests } from "@app/Middleware/reducers/UsuarioSGRHSlice";
 // import { GetInfoUser } from "@app/shared/helpers/userConfig";
 // import { IAppUser } from "@app/models/IAppUser";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 // import { authenticationSlice } from "@app/Middleware/reducers/AuthenticationSlice";
 // import { useAppDispatch, useAppSelector } from "@app/Middleware/store/store";
 // import { ThemeToggle } from "../themeToggle";
@@ -31,19 +40,19 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(() => ({
 	list: {
 		width: 350,
-		textColor: "gray",
 	},
 	fullList: {
 		width: "auto",
 	},
 	paper: {
 		background:
-			"linear-gradient(45deg, rgba(220,15,77,0.8) 00%, rgba(155, 7, 45,0.6)  50%, rgba(220,15,77,0.8) 100%),",
-		// +
-		// `url(${Images})`,
+			"linear-gradient(45deg, rgba(220,15,77,0.8) 00%, rgba(155, 7, 45,0.6)  50%, rgba(220,15,77,0.8) 100%)," +
+			// `url(${Images})`,
+			"https://images.theconversation.com/files/376676/original/file-20201228-49872-119qm9b.jpg?ixlib=rb-1.1.0&rect=0%2C0%2C798%2C499&q=45&auto=format&w=1000&fit=clip",
 		backgroundSize: "cover",
 		backgroundPositionX: "center",
-		//color: theme.palette.primary.main
+		// color: theme.palette.primary.main
+		color: "black",
 	},
 	root: {
 		"& NoSsr SwipeArea": {
@@ -73,6 +82,7 @@ const useStyles = makeStyles(() => ({
 	small: {
 		width: "100%",
 		height: "auto",
+		gridColumn: "span 1",
 	},
 	contentaccordion: {
 		padding: "0 0 0 24px",
@@ -103,7 +113,7 @@ export const Drawer = (): JSX.Element => {
 	// 	dispatch(authenticationSlice.actions.ForceLogOut());
 	// };
 
-	const hitoryPush = (page: string) => {
+	const historyPush = (page: string) => {
 		<Navigate to={page} />;
 		setIsOpen(false);
 	};
@@ -119,7 +129,7 @@ export const Drawer = (): JSX.Element => {
 				}}
 				size="large"
 			>
-				<MenuIcon />
+				<Menu />
 			</IconButton>
 			<SwipeableDrawer
 				anchor="left"
@@ -134,256 +144,146 @@ export const Drawer = (): JSX.Element => {
 				classes={{ paper: classes.paper, root: classes.root }}
 			>
 				<div className={classes.list}>
-					{/* <Box
+					<Box
 						className="text-2xl font-sans px-4 py-2"
 						textAlign="center"
 					>
 						<div className="grid grid-cols-5">
 							<Avatar
-								alt={InfoUsuario?.nombre}
-								className={classNames(
-									classes.small,
-									"col-span-1 w-full"
-								)}
-								src={
-									InfoUsuario?.image?.image_profile &&
-									`https://sgrh.newsan.com.ar/assets/imgProFile/${InfoUsuario?.image?.image_profile}`
-								}
+								alt="Cristian"
+								className={classes.small}
+								src="https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg"
 							/>
-							<div className="col-span-4 ml-4 text-gray-50 text-sm font-medium text-left">
-								<div>
-									{InfoUsuario?.nombre +
-										" " +
-										InfoUsuario?.apellido}
-								</div>
-								<div>{AppUserInfo?.permisos?.rol?.name}</div>
-								<div>{AppUserInfo?.permisos?.subrol?.name}</div>
+							<div className="col-span-4 ml-4 text-black-50 text-sm font-medium text-left">
+								<div>Cristian Garcia</div>
+								<div>Desarrollador</div>
+								<div>Editor</div>
 							</div>
 						</div>
-					</Box> */}
+					</Box>
 					<div className="flex md:hidden justify-around items-center ">
 						{/* <ThemeToggle /> */}
 					</div>
 					<Divider />
-					<Accordion className={classes.accordion}>
-						<AccordionSummary
-							className={classes.summaryaccordion}
-							expandIcon={
-								<ExpandMoreIcon className="text-gray-50" />
-							}
-						>
-							<ListItem button>
-								<ListItemIcon>
-									<Icon
-										className="text-gray-50 text-center"
-										style={{ fontSize: "1.75rem" }}
-									>
-										<img
-											className="h-full"
-											src={`${process.env.PUBLIC_URL}/icons/auditIcon.svg`}
-											style={{ filter: "invert(1)" }}
-										/>
-									</Icon>
-								</ListItemIcon>
-								<ListItemText
-									className="text-gray-50"
-									primary={"Auditorías"}
-								/>
-							</ListItem>
-						</AccordionSummary>
-						<AccordionDetails className={classes.contentaccordion}>
-							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
-								<ListItem
-									button
-									onClick={() => {
-										hitoryPush(
-											"/main/auditoria/table-of-audits"
-										);
-									}}
-								>
-									<ListItemText
-										primary={"Creación/Edición Auditorías"}
-										className="text-gray-50"
-									/>
-								</ListItem>
-							</div>
-							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
-								<ListItem
-									button
-									onClick={() => {
-										hitoryPush("/main/auditoria/todo");
-									}}
-								>
-									<ListItemText
-										primary={"Tareas"}
-										className="text-gray-50"
-									/>
-								</ListItem>
-							</div>
-							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
-								<ListItem
-									button
-									onClick={() => {
-										hitoryPush(
-											"/main/auditoria/tabla-de-auditorias-terminadas"
-										);
-									}}
-								>
-									<ListItemText
-										primary={"Auditorías realizadas"}
-										className="text-gray-50"
-									/>
-								</ListItem>
-							</div>
-							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
-								<ListItem
-									button
-									onClick={() => {
-										hitoryPush(
-											"/main/auditoria/auditorias-para-realizar"
-										);
-									}}
-								>
-									<ListItemText
-										primary={"Realizar auditorías del dia"}
-										className="text-gray-50"
-									/>
-								</ListItem>
-							</div>
-						</AccordionDetails>
-					</Accordion>
+					<ListItem button>
+						<ListItemIcon>
+							<Dashboard />
+						</ListItemIcon>
+						<ListItemText
+							className="text-black-50"
+							primary={"Dashboard"}
+						/>
+					</ListItem>
 
 					<Accordion className={classes.accordion}>
 						<AccordionSummary
 							className={classes.summaryaccordion}
 							expandIcon={
-								<ExpandMoreIcon className="text-gray-50" />
+								<ExpandMore className="text-black-50" />
 							}
 						>
 							<ListItem button>
 								<ListItemIcon>
-									<Icon
-										className="text-gray-50 text-center"
-										style={{ fontSize: "1.75rem" }}
-									>
-										<img
-											className="h-full"
-											src={`${process.env.PUBLIC_URL}/icons/productionIcon.svg`}
-											style={{ filter: "invert(1)" }}
-										/>
-									</Icon>
+									<Sensors />
 								</ListItemIcon>
 								<ListItemText
-									className="text-gray-50"
-									primary={"Producción"}
+									className="text-black-50"
+									primary={"Sensores"}
 								/>
 							</ListItem>
 						</AccordionSummary>
 						<AccordionDetails className={classes.contentaccordion}>
 							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
+								<ChevronRight className="text-black-50" />
 								<ListItem
 									button
 									onClick={() => {
-										hitoryPush("/main/produccion/prod");
+										historyPush("/main/produccion/prod");
 									}}
 								>
 									<ListItemText
-										primary={"Información Producción"}
-										className="text-gray-50"
+										primary={"Lista de sensores"}
+										className="text-black-50"
 									/>
 								</ListItem>
 							</div>
-							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
+							{/* <div className="flex items-center">
+								<ChevronRight className="text-black-50" />
 								<ListItem
 									button
 									onClick={() => {
-										hitoryPush("/main/produccion/traza");
+										historyPush("/main/produccion/traza");
 									}}
 								>
 									<ListItemText
 										primary={"Administrar Trazabilidad"}
-										className="text-gray-50"
+										className="text-black-50"
 									/>
 								</ListItem>
 							</div>
 							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
+								<ChevronRight className="text-black-50" />
 								<ListItem
 									button
 									onClick={() => {
-										hitoryPush(
+										historyPush(
 											"/main/mes/production-orders"
 										);
 									}}
 								>
 									<ListItemText
 										primary={"Ordenes de producción"}
-										className="text-gray-50"
+										className="text-black-50"
 									/>
 								</ListItem>
-							</div>
+							</div> */}
 						</AccordionDetails>
 					</Accordion>
 					<Accordion className={classes.accordion}>
 						<AccordionSummary
 							className={classes.summaryaccordion}
 							expandIcon={
-								<ExpandMoreIcon className="text-gray-50" />
+								<ExpandMore className="text-black-50" />
 							}
 						>
 							<ListItem button>
 								<ListItemIcon>
-									<Icon
-										className="text-gray-50 text-center"
-										style={{ fontSize: "1.75rem" }}
-									>
-										<img
-											className="h-full"
-											src={`${process.env.PUBLIC_URL}/icons/calidad.svg`}
-											style={{ filter: "invert(1)" }}
-										/>
-									</Icon>
+									<PeopleAlt />
 								</ListItemIcon>
 								<ListItemText
-									className="text-gray-50"
-									primary={"Calidad"}
+									className="text-black-50"
+									primary={"Usuarios"}
 								/>
 							</ListItem>
 						</AccordionSummary>
 						<AccordionDetails className={classes.contentaccordion}>
 							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
+								<ChevronRight className="text-black-50" />
 								<ListItem
 									button
 									onClick={() => {
-										hitoryPush("/main/calidad/calidad");
+										historyPush("/main/calidad/calidad");
 									}}
 								>
 									<ListItemText
-										primary={"Carga de rechazos"}
-										className="text-gray-50"
+										primary={"Lista de Usuarios"}
+										className="text-black-50"
 									/>
 								</ListItem>
 							</div>
 							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
+								<ChevronRight className="text-black-50" />
 								<ListItem
 									button
 									onClick={() => {
-										hitoryPush(
+										historyPush(
 											"/main/calidad/no-conformes"
 										);
 									}}
 								>
 									<ListItemText
-										primary={"Consulta de no conformes"}
-										className="text-gray-50"
+										primary={"Nuevo Usuario"}
+										className="text-black-50"
 									/>
 								</ListItem>
 							</div>
@@ -393,59 +293,87 @@ export const Drawer = (): JSX.Element => {
 						<AccordionSummary
 							className={classes.summaryaccordion}
 							expandIcon={
-								<ExpandMoreIcon className="text-gray-50" />
+								<ExpandMore className="text-black-50" />
 							}
 						>
 							<ListItem button>
 								<ListItemIcon>
-									<Icon
-										className="text-gray-50 text-center"
-										style={{ fontSize: "1.75rem" }}
-									>
-										<img
-											className="h-full"
-											src={`${process.env.PUBLIC_URL}/icons/battery.svg`}
-											style={{ filter: "invert(1)" }}
-										/>
-									</Icon>
+									<Api />
 								</ListItemIcon>
 								<ListItemText
-									className="text-gray-50"
-									primary={"Baterías"}
+									className="text-black-50"
+									primary={"API"}
 								/>
 							</ListItem>
 						</AccordionSummary>
 						<AccordionDetails className={classes.contentaccordion}>
 							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
+								<ChevronRight className="text-black-50" />
 								<ListItem
 									button
 									onClick={() => {
-										hitoryPush("/main/baterias/CRUD");
+										historyPush("/main/baterias/CRUD");
 									}}
 								>
 									<ListItemText
-										primary={"Carga de baterías"}
-										className="text-gray-50"
+										primary={"Endpoints Disponibles"}
+										className="text-black-50"
 									/>
 								</ListItem>
 							</div>
-							<div className="flex items-center">
-								<ChevronRightIcon className="text-gray-50" />
+							{/* <div className="flex items-center">
+								<ChevronRight className="text-black-50" />
 								<ListItem
 									button
 									onClick={() => {
-										hitoryPush("/main/baterias/view");
+										historyPush("/main/baterias/view");
 									}}
 								>
 									<ListItemText
 										primary={"Vista de baterías"}
-										className="text-gray-50"
+										className="text-black-50"
 									/>
 								</ListItem>
-							</div>
+							</div> */}
 						</AccordionDetails>
 					</Accordion>
+					<Divider />
+					<ListItem
+						button
+						onClick={() =>
+							window.open(
+								"https://www.cancilleria.gob.ar/es/iniciativas/dna/instituto-antartico-argentino",
+								"_blank"
+							)
+						}
+					>
+						<ListItemIcon>
+							<FilterHdr />
+						</ListItemIcon>
+						<ListItemText
+							className="text-black-50"
+							primary={"Instituto Antártico Argentino"}
+						/>
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<Info />
+						</ListItemIcon>
+						<ListItemText
+							className="text-black-50"
+							primary={"Sobre Nosotros"}
+						/>
+					</ListItem>
+					<ListItem button>
+						<ListItemIcon>
+							<ContactMail />
+						</ListItemIcon>
+						<ListItemText
+							className="text-black-50"
+							primary={"Contacto"}
+						/>
+					</ListItem>
+					<Divider />
 					<ListItem
 						button
 						onClick={() => {
@@ -454,7 +382,7 @@ export const Drawer = (): JSX.Element => {
 						}}
 					>
 						<ListItemIcon>
-							<ExitToAppIcon className="text-gray-50" />
+							<ExitToApp className="text-black-50" />
 						</ListItemIcon>
 						<ListItemText primary={"Salir"} />
 					</ListItem>
